@@ -1,0 +1,12 @@
+{
+  "verbose": true,
+  "ignore": [
+    "node_modules/",
+    "src/"
+  ],
+  "watch": [
+    "dist/"
+  ],
+  "delay": "1000",
+  "ext": "js,jsx,css,png,svg,jpg,txt"
+}

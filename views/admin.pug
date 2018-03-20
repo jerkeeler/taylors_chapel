@@ -1,0 +1,38 @@
+extends layout
+
+//- action="/api/photos/upload?_csrf=" + _csrf method="post"
+
+block content
+  section.page-section
+    .container
+      div
+        if isAdmin
+          span Hello #{user.displayName}! &nbsp;
+        if user
+          a(class="button is-danger" href="/auth/logout") Logout
+        else
+          a(class="button is-primary" href="/auth/login") Login
+      if isAdmin
+        hr
+        div
+          h3.title.is-3 Upload New Photos
+          p You may only upload up to 12 photos at a time!
+          form(id="photo-upload")
+            .field
+              .file.is-info
+                label.file-label
+                  input(class="file-input" type="file" name="photos" id="photos-input" multiple)
+                  span.file-cta
+                    span.file-icon
+                      i.fa.fa-upload
+                    span.file-label Choose Files
+                  span#photos-input-names.file-name No Files Selected
+            .field.is-hidden
+              input(type="text" name="_csrf" id="photos-csrf" value=_csrf)
+            button(class="button is-primary" type="submit") Upload
+
+          div.notification.is-info.validation-results.is-hidden#upload-pending
+            p Uploading...
+
+          div.notification.is-success.validation-results.is-hidden#upload-success
+            p Photos have been uploaded!

@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  section.page-section
+    .container
+      each row in photos
+        .img-row
+          each photo in row
+            div(class="img-item" data-target=photo.token)
+              if isAdmin
+                if photo.favorite
+                  i(class="fa fa-flag fav-flag" data-target=photo.token data-action="unfav")
+                else
+                  i(class="fa fa-flag-o fav-flag" data-target=photo.token data-action="fav")
+              img(src=photo.getThumbUrl() style="display:block;margin:0 auto;")
+            div(class="modal" id=photo.token)
+              .modal-background
+              .modal-content
+                .image
+                  img(data-async-src=photo.getFullUrl() class="gallery-full-img")
+                button(class="modal-close is-large" aria-label="close")

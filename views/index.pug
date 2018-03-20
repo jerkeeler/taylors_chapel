@@ -1,0 +1,80 @@
+extends layout.pug
+
+block content
+  span#page-arrow.fa.fa-angle-down.fa-4x
+  section.hero.is-primary.is-fullheight#taylor-header
+    .hero-body
+      .container.has-text-centered
+        h1.title.is-1 Taylor's Chapel
+        h2.subtitle.is-4 Baltimore's Gem
+
+  section#history.page-section
+    .container
+      h4.title.is-3 History
+      p Taylor's Chapel is an historic chapel located at Baltimore, Maryland, United States. It is a Greek Revival style chapel located in a quarter acre fenced-in plot, which also includes a graveyard, within Mount Pleasant Park in northeast Baltimore. The structure is a small, mid-19th-century country church, built of stone, covered with stucco, painted white, and has a gable roof. The interior features frescoes on the walls and ceiling, attributed by tradition to the Italian-American painter Constantino Brumidi. The frescoes are trompe l’oeil paintings of classical architectural detailing, including pilasters, panels, coffering, and ornaments. It has remained completely unaltered since its construction in 1853. It was built as a Methodist chapel by the Taylor family on their Mt. Pleasant plantation. In 1925 the City of Baltimore purchased the land surrounding the chapel and burial grounds for use as a public golf course. The site of the chapel and burial grounds was left to a self-perpetuating board of trustees. Taylor's Chapel is considered the mother church of St. John's United Methodist Church of Hamilton.
+
+      p Taylor's Chapel was listed on the National Register of Historic Places in 1983.
+
+  //- div.triangle-separator
+
+  section#gallery.page-section
+    .container
+      h4.title.is-3 Gallery
+        a(class="button is-primary" href="/gallery" style="float:right;") View More
+      each row in photos
+        .img-row
+          each photo in row
+            div(class="img-item" data-target=photo.token)
+              img(src=photo.getThumbUrl() style="display:block;margin:0 auto;")
+            div(class="modal" id=photo.token)
+              .modal-background
+              .modal-content
+                .image
+                  img(data-async-src=photo.getFullUrl() class="gallery-full-img")
+                button(class="modal-close is-large" aria-label="close")
+
+  section#location.hero.is-primary.is-fullheight
+    .hero-body
+      .container
+        h4.title.is-3 Location
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3732.519676990474!2d-76.57684372511129!3d39.36207741510433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c8058a32bf9197%3A0x8bb1936807c6c867!2sTaylors+Chapel!5e0!3m2!1sen!2sus!4v1509838321966" width="100%" height="500" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+  section#contact.page-section
+    .container
+      h4.title.is-3 Contact
+
+      form#contact-form
+        .field
+          label.label Name
+          .control.has-icons-left
+            input(class="input" type="text" placeholder="John Smith" name="name" required)
+            span.icon.is-small.is-left
+              i.fa.fa-user
+
+        .field
+          label.label Email
+          .control.has-icons-left
+            input(class="input" type="email" placeholder="johnsmith@fake.com" name="email" required)
+            span.icon.is-small.is-left
+              i.fa.fa-envelope
+
+        .field
+          label.label Message
+          .control
+            textarea(class="textarea" placeholder="I love Taylor's Chapel!" name="message" required)
+
+        .field.is-hidden
+          input(type="text" name="_csrf" value=_csrf)
+
+        .field
+          .control
+            button(class="button is-primary" type="submit") Submit
+
+      div.notification.is-danger.content.validation-results.is-hidden
+        ul#validation-results
+
+      div.notification.is-info.validation-results.is-hidden
+        p Processing...
+
+      div.notification.is-success.validation-results.is-hidden
+        p Message has been sent succesfully!
