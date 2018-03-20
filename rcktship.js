@@ -15,7 +15,7 @@ rocket.mission('default', async () => {
     rocket.remote('git reset --hard');
     rocket.remote('git pull');
     rocket.remote('yarn install --production --no-save');
-    rocket.remote('./node_modules/.bin/sequelize db:migrate');
+    rocket.remote('NODE_ENV=production ./node_modules/.bin/sequelize db:migrate');
   });
   rocket.remote(`pm2 restart ${currentCfg.appName}`);
 });
@@ -25,6 +25,14 @@ rocket.mission('restart', async () => {
   await checkEnvironment();
   rocket.remote(`pm2 restart ${currentCfg.appName}`);
 })
+
+rocket.mission('migrate', async () => {
+  const currentCfg = config.remote[rocket.currentTarget];
+  await checkEnvironment();
+  rocket.with(`cd ${currentCfg.remoteWorkingDir}`, () => {
+    rocket.remote('NODE_ENV=production ./node_modules/.bin/sequelize db:migrate');
+  });
+});
 
 rocket.mission('test', async () => {
   await checkEnvironment();

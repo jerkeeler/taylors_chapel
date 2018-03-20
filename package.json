@@ -13,7 +13,8 @@
     "build-webpack": "./node_modules/.bin/webpack --env=dev",
     "build-webpack:prod": "./node_modules/.bin/webpack --env=prod",
     "watch-webpack": "./node_modules/.bin/webpack --env=dev --watch --progress --colors",
-    "watch": "./node_modules/.bin/concurrently -k -p \"[{name}]\" -n \"Typescript,Webpack,Node\" -c \"magenta.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-webpack\" \"npm run debug\" "
+    "watch": "./node_modules/.bin/concurrently -k -p \"[{name}]\" -n \"Typescript,Webpack,Node\" -c \"magenta.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-webpack\" \"npm run debug\" ",
+    "make-admin": "node ./scripts/make-admin"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
