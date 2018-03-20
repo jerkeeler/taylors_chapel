@@ -184,7 +184,7 @@ favFlags.forEach(el => {
   });
 });
 
-function getRequest(url): Promise<any> {
+function getRequest(url: string): Promise<any> {
   return new Promise((resolve, reject) => {
     const httpRequest = new XMLHttpRequest();
     httpRequest.open('GET', url);
