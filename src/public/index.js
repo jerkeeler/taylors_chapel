@@ -5,3 +5,4 @@ import './ts/index';
 import './img/taylor1.jpg';
 import './img/taylor2.jpg';
 import './img/favicon.png';
+import './img/event_2018_05_06.png';

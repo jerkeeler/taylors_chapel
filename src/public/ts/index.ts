@@ -7,7 +7,7 @@ const now = new Date();
 const copyrightYearID = 'copyright-year';
 document.getElementById(copyrightYearID).innerHTML = ` ${now.getFullYear()}`;
 
-const elements = ['history', 'gallery', 'location', 'contact'];
+const elements = ['events', 'history', 'gallery', 'location', 'contact'];
 
 if (document.getElementById('page-arrow')) {
   document.getElementById('page-arrow').addEventListener('click', () => {

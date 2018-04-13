@@ -9,34 +9,34 @@ rocket.mission('default', async () => {
   const currentCfg = config.remote[rocket.currentTarget];
   await checkEnvironment();
 
-  rocket.local('npm run build:prod')
-  rocket.local(`scp -r dist/ ${currentCfg.SSHAlias}:${currentCfg.remoteWorkingDir}/`);
-  rocket.with(`cd ${currentCfg.remoteWorkingDir}`, () => {
-    rocket.remote('git reset --hard');
-    rocket.remote('git pull');
-    rocket.remote('yarn install --production --no-save');
-    rocket.remote('NODE_ENV=production ./node_modules/.bin/sequelize db:migrate');
+  await rocket.local('npm run build:prod')
+  await rocket.local(`scp -r dist/ ${currentCfg.SSHAlias}:${currentCfg.remoteWorkingDir}/`);
+  await rocket.with(`cd ${currentCfg.remoteWorkingDir}`, async () => {
+    await rocket.remote('git reset --hard');
+    await rocket.remote('git pull');
+    await rocket.remote('yarn install --production --no-save');
+    await rocket.remote('NODE_ENV=production ./node_modules/.bin/sequelize db:migrate');
   });
-  rocket.remote(`pm2 restart ${currentCfg.appName}`);
+  await rocket.remote(`pm2 restart ${currentCfg.appName}`);
 });
 
 rocket.mission('restart', async () => {
   const currentCfg = config.remote[rocket.currentTarget];
   await checkEnvironment();
-  rocket.remote(`pm2 restart ${currentCfg.appName}`);
-})
+  await rocket.remote(`pm2 restart ${currentCfg.appName}`);
+});
 
 rocket.mission('migrate', async () => {
   const currentCfg = config.remote[rocket.currentTarget];
   await checkEnvironment();
-  rocket.with(`cd ${currentCfg.remoteWorkingDir}`, () => {
-    rocket.remote('NODE_ENV=production ./node_modules/.bin/sequelize db:migrate');
+  await rocket.with(`cd ${currentCfg.remoteWorkingDir}`, async () => {
+    await rocket.remote('NODE_ENV=production ./node_modules/.bin/sequelize db:migrate');
   });
 });
 
 rocket.mission('test', async () => {
   await checkEnvironment();
-  rocket.remote('pwd');
+  await rocket.remote('pwd');
 });
 
 function checkEnvironment() {

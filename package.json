@@ -75,7 +75,7 @@
     "inquirer": "^5.1.0",
     "node-sass": "^4.7.2",
     "nodemon": "^1.12.1",
-    "rcktship": "^0.3.1",
+    "rcktship": "^1.0.0",
     "sass-loader": "^6.0.7",
     "ts-lint": "^4.5.1",
     "ts-loader": "^4.1.0",
