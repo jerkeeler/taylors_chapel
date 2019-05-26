@@ -14,10 +14,11 @@ rocket.mission('default', async () => {
   await rocket.with(`cd ${currentCfg.remoteWorkingDir}`, async () => {
     await rocket.remote('git reset --hard');
     await rocket.remote('git pull');
+    await rocket.remote('nvm use 8')
     await rocket.remote('yarn install --production --no-save');
     await rocket.remote('NODE_ENV=production ./node_modules/.bin/sequelize db:migrate');
   });
-  await rocket.remote(`pm2 restart ${currentCfg.appName}`);
+  await rocket.remote(`npx pm2 restart ${currentCfg.appName}`);
 });
 
 rocket.mission('restart', async () => {
