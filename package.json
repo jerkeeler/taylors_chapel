@@ -34,7 +34,7 @@
     "pm2": "^2.10.1",
     "pug": "2.0.0-beta11",
     "reflect-metadata": "^0.1.12",
-    "sequelize": "^4.35.2",
+    "sequelize": "^5.15.1",
     "sequelize-cli": "^4.0.0",
     "sequelize-typescript": "^0.6.3",
     "sharp": "^0.20.1",
