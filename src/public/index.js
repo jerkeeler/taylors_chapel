@@ -7,3 +7,4 @@ import './img/taylor2.jpg';
 import './img/favicon.png';
 import './img/event_2018_05_06.png';
 import './img/event_2018_12_09.png';
+import './img/event_2019_12_08.png';
